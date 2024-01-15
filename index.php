@@ -262,12 +262,12 @@ $categoria = null;
                 <div class="act-list">
                     <p class="act-list titulo-log">Actualizar Lista</p>
                     <p> </p>
-                    <form class="form-upload" action="upload.php" method="post" enctype="multipart/form-data" target="upload-frame" required>
+                    <form class="form-upload" action="upload.php" method="post" enctype="multipart/form-data" target="_blank" rel="nofollow" required>
                         <label for="fileInput">Selecciona un archivo CSV:</label>
                         <input class="selec-arch" type="file" name="fileInput" id="fileInput" accept=".csv" required>
                         <button onclick="uploadCsv()">IMPORTAR</button>
+                        <span class="msj-estado"></span>
                     </form>
-                    <iframe name="upload-frame"></iframe>
                     <button class="act-list volver" onclick="volver(this)">VOLVER</button>
                 </div>
                 <div class="act-monto">
@@ -299,6 +299,10 @@ $categoria = null;
 <script src="código.js"></script>
 <script>
 
+    window.addEventListener('beforeunload', function (event) {
+        event.preventDefault();
+    });
+
     // secciones adm
     let logCont = document.querySelector('.login-cont');
     let opcCont = document.querySelectorAll('.opc-adm');
@@ -327,10 +331,15 @@ $categoria = null;
 
 function uploadCsv(){
 
+    msjEstado = document.querySelector('.msj-estado');
+
+    event.preventDefault();
+
     var fileInput = document.querySelector('.selec-arch');
     var file = fileInput.files[0];
 
     if (file) {
+
         var formData = new FormData();
         formData.append('fileInput', file);
 
@@ -339,16 +348,28 @@ function uploadCsv(){
 
         xhr0.onreadystatechange = function () {
         
-            if (xhr0.readyState == 4 && xhr0.status == 200 && xhr0.readyState == 3 ) {
-                // La respuesta del servidor (puede ser un mensaje de éxito o error)
-                console.log(xhr0.responseText);
+            if (xhr0.status == 200) {
+                msjEstado.innerHTML = xhr0.responseText;
+                
+            }else if (xhr0.readyState == 4 ){
+                msjEstado.innerHTML = xhr0.responseText;
             }
         };
 
         xhr0.send(formData);
 
+        var interval = setInterval(function () {
+            if (xhr0.readyState === 1) {
+                msjEstado.innerHTML='<div class="loader"></div><p>Esto puede demorar unos segundos...</p>';
+            }
+        }, 1000);
+
+        setTimeout(function () {
+            clearInterval(interval);
+        }, 10000);
+
     } else {
-        console.error('No file selected.');
+        msjEstado.innerHTML = 'Seleccione un archivo compatible.';
     }
 }
 
@@ -369,24 +390,19 @@ function actUsCon(){
         xhr.open("POST", "actualizar.php", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-        // Crear los datos que se enviarán al servidor
         var datos = "nuevoUsuario=" + usuarioNuevo + "&nuevaClave=" + claveNueva;
 
-        // Manejar la respuesta del servidor
         xhr.onload = function () {
-                    if (xhr.status === 200) {
-                        console.log('File uploaded successfully.');
-                    } else {
-                        console.error('Error uploading file.');
-                    }
-                };
+            if (xhr.status === 200) {
+                console.log('File uploaded successfully.');
+            } else {
+                console.error('Error uploading file.');
+            }
+        };
 
-        // Enviar la solicitud al servidor
         xhr.send(datos);
 
     }
 }
-
-
 
 </script>

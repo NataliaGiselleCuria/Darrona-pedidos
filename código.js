@@ -72,6 +72,23 @@ function radio(x){
     totalProd();
 }
 
+function categoria(x){
+
+    cate = x.innerText;
+    titulo_cat.innerText = cate;
+
+    for (let i = 0; i < prodLi.length; i++){
+        if (cate== "TODOS LOS PRODUCTOS"){
+            prodLi[i].style.display="table-row";
+        } else {
+            if (prodLi[i].firstElementChild.innerText != cate ){
+                prodLi[i].style.display="none";
+            }else{
+                prodLi[i].style.display="table-row";
+            }
+        }
+    }
+}
 // Abrir/cerrar ventana
 let ventanaEnviar = document.querySelector('.enviar-pedido');
 let ventanaEnviarCont = document.querySelector('.enviar-cont');
@@ -378,7 +395,6 @@ function actMontoMinimo(){
         montoActual[i].innerHTML= nuevoMonto.value;
     }
 }
-
 
 habilitarEnviar();
 
