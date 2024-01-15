@@ -262,11 +262,12 @@ $categoria = null;
                 <div class="act-list">
                     <p class="act-list titulo-log">Actualizar Lista</p>
                     <p> </p>
-                    <form class="form-upload" action="upload.php" method="post" enctype="multipart/form-data" target="_blank" required>
+                    <form class="form-upload" action="upload.php" method="post" enctype="multipart/form-data" target="upload-frame" required>
                         <label for="fileInput">Selecciona un archivo CSV:</label>
                         <input class="selec-arch" type="file" name="fileInput" id="fileInput" accept=".csv" required>
                         <button onclick="uploadCsv()">IMPORTAR</button>
                     </form>
+                    <iframe name="upload-frame"></iframe>
                     <button class="act-list volver" onclick="volver(this)">VOLVER</button>
                 </div>
                 <div class="act-monto">
@@ -337,7 +338,8 @@ function uploadCsv(){
         xhr0.open('POST', 'upload.php', true);
 
         xhr0.onreadystatechange = function () {
-            if (xhr0.readyState == 4 && xhr0.status == 200) {
+        
+            if (xhr0.readyState == 4 && xhr0.status == 200 && xhr0.readyState == 3 ) {
                 // La respuesta del servidor (puede ser un mensaje de éxito o error)
                 console.log(xhr0.responseText);
             }
