@@ -72,23 +72,7 @@ function radio(x){
     totalProd();
 }
 
-function categoria(x){
 
-    cate = x.innerText;
-    titulo_cat.innerText = cate;
-
-    for (let i = 0; i < prodLi.length; i++){
-        if (cate== "TODOS LOS PRODUCTOS"){
-            prodLi[i].style.display="table-row";
-        } else {
-            if (prodLi[i].firstElementChild.innerText != cate ){
-                prodLi[i].style.display="none";
-            }else{
-                prodLi[i].style.display="table-row";
-            }
-        }
-    }
-}
 // Abrir/cerrar ventana
 let ventanaEnviar = document.querySelector('.enviar-pedido');
 let ventanaEnviarCont = document.querySelector('.enviar-cont');
@@ -139,8 +123,8 @@ let actMontoCont = document.querySelectorAll('.act-monto');
 let actLogCont = document.querySelectorAll('.act-log');
 
 //actualizar monto
-let nuevoMonto = document.querySelector('#nuevo-monto');
-let montoActual = document.querySelectorAll('.prec-minimo');
+
+
 
 actList.addEventListener("click", () =>{
     for (let i = 0; i < opcCont.length; i++){
@@ -201,13 +185,15 @@ cerrarLog.addEventListener("click", () =>{
     usuario.value = "";
     clave.value = "";
     errorLog.innerHTML = "";
+
+    location.reload(true);
 });  
 
 function buscador(){
     let filtro = inputBuscador.value.toLowerCase();
 
     for (let i = 0; i < prodLi.length; i++) {
-        if(prodLi[i].childNodes[3].innerHTML.toLowerCase().includes(filtro)){
+        if(prodLi[i].children[2].innerHTML.toLowerCase().includes(filtro)){
             prodLi[i].style.display = 'table-row';
         } else {
             prodLi[i].style.display = 'none';
@@ -226,7 +212,9 @@ function abrirVentana(){
     ventanaEnviarCont.className = 'enviar-cont-cerrar';
     botonFinalizar.style.display = 'none';
     botonCerrar.style.display = 'unset';
-    inicio.style.height = '210px'
+
+    inicio.style.height = '275px';
+      
 }
 
 function cerrar(){
@@ -236,9 +224,59 @@ function cerrar(){
     ventanaEnviarCont.className = 'enviar-cont';
     botonCerrar.style.display = 'none';
     botonFinalizar.style.display = 'unset';
-    inicio.style.height = '170px'
+
+    if(info.style.height==0){
+        inicio.style.height = '170px'
+    }else{
+        inicio.style.height = '210px'
+    }
+    
 }
 
+function categoria(x){
+
+    if(x == "TODOS LOS PRODUCTOS" || x.innerHTML == "TODOS LOS PRODUCTOS"){
+        cate = "TODOS LOS PRODUCTOS";
+
+        if( tabla.style.display == 'none'){
+            tablaPedidoFinal.style.display = 'none';
+            tabla.style.display = 'block';
+            botonVerPedido.style.display = 'block';
+            botonVolver.style.display = 'none';
+            info.style.height = '0px';
+            infoCont.style.opacity = '0';
+            infoCont.className = 'info-cont';
+
+            if(info.style.height==0){
+                inicio.style.height = '170px'
+            }else{
+                inicio.style.height = '210px'
+            }
+
+        }
+
+        for (let i = 0; i < prodLi.length; i++){
+            if (cate == "TODOS LOS PRODUCTOS"){
+                prodLi[i].style.display="table-row";
+            }
+        }
+        
+    }else{
+        cate = x.innerText;
+    }
+   
+    titulo_cat.innerHTML = cate;
+
+    for (let i = 0; i < prodLi.length; i++){
+        if (cate != "TODOS LOS PRODUCTOS"){
+            if (prodLi[i].firstElementChild.innerText != cate ){
+                prodLi[i].style.display="none";
+            }else{
+                prodLi[i].style.display="table-row";
+            }
+        }
+    }
+}
 function verPedido(){
     
     let elEliminar = document.querySelectorAll(".tr-tablaFinal");
@@ -271,7 +309,7 @@ function verPedido(){
         tablaPedidoFinal.childNodes[1].appendChild(pedidoFinal[i]);
     }
 
-    categoria("TU PEDIDO");
+    titulo_cat.innerText = "TU PEDIDO";
 
     tabla.style.display = 'none';
 
@@ -282,9 +320,11 @@ function verPedido(){
         botonVolver.style.display = 'block';
     }
 
+    info.style.display = 'flex';
     info.style.height = '45px';
     infoCont.style.opacity = '1';
     infoCont.className = 'info-cont-cerrar';
+    
 }
 
 function rellenarTablaExel(){
@@ -390,11 +430,7 @@ function volver(el){
 
 }
 
-function actMontoMinimo(){
-    for (let i = 0; i < montoActual.length; i++) {
-        montoActual[i].innerHTML= nuevoMonto.value;
-    }
-}
+
 
 habilitarEnviar();
 

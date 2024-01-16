@@ -25,6 +25,12 @@ $sql3 = $con->prepare("SELECT * FROM login");
 $sql3->execute();
 $log = $sql3->fetchAll(PDO::FETCH_ASSOC);
 
+$sql6 = $con->prepare("SELECT * FROM montominimo");
+$sql6->execute();
+$monto = $sql6->fetchAll(PDO::FETCH_ASSOC);
+
+print_r($monto);
+
 $categoria = null;
 ?>
 
@@ -49,9 +55,9 @@ $categoria = null;
             <div class="banner">
                 <img src="img/Darrona vertical.png" class="logo" alt="Logo Distribuidora de productos naturales dietéticas Darrona">
                 <div class="titulo">
-                    <h1>Pedidos Dietética Darrona</h1>
-                    <h2>LISTA DE PRECIOS MAYORISTA</h2>
-                    <p>COMPRA MINIMA $</p><p class="prec-minimo"></p>
+                    <h1 class="t1">Pedidos Dietética Darrona</h1>
+                    <h2 class="t2">LISTA DE PRECIOS MAYORISTA</h2>
+                    <p class="t3">COMPRA MINIMA $</p><p id="prec-minimo t3"><?php echo $monto[0]['monto']?></p>
                 </div>
             </div>
         </nav>
@@ -65,8 +71,9 @@ $categoria = null;
                     <p class="total"></p>
                 </span>
                 <span class="btn">
-                    <button class="bt ver-resumen" onclick="verPedido()">VER PEDIDO</button>
                     <button class="bt volver" onclick="categoria('TODOS LOS PRODUCTOS')">VOLVER</button>
+                    <button class="bt ver-resumen" onclick="verPedido()">VER PEDIDO</button>
+                    
                     <button class="bt fin" onclick="abrirVentana(), verPedido()" >FINALIZAR</button>
                     <button class="bt cerrar" onclick="cerrar()">CERRAR</button>
                 </span>
@@ -262,33 +269,37 @@ $categoria = null;
                 <div class="act-list">
                     <p class="act-list titulo-log">Actualizar Lista</p>
                     <p> </p>
-                    <form class="form-upload" action="upload.php" method="post" enctype="multipart/form-data" target="_blank" rel="nofollow" required>
+                    <form class="form-upload" action="upload.php" method="post" enctype="multipart/form-data" target="_blank" required>
                         <label for="fileInput">Selecciona un archivo CSV:</label>
                         <input class="selec-arch" type="file" name="fileInput" id="fileInput" accept=".csv" required>
                         <button onclick="uploadCsv()">IMPORTAR</button>
                         <span class="msj-estado"></span>
                     </form>
-                    <button class="act-list volver" onclick="volver(this)">VOLVER</button>
+                    <button class="act-list volver-adm" onclick="volver(this)">VOLVER</button>
                 </div>
                 <div class="act-monto">
                     <p class="act-monto titulo-log">Actializar Monto Minimo</p>
                     <p> Valor actual del minimo de compra:</p>
-                    <p class="prec-minimo"></p>
-                    <label for="nuevo-monto">Ingrese el nuevo monto minimo:</label>
-                    <input type="number" name="nuevo-monto" id="nuevo-monto" required>   
-                    <button class="act-btn" onclick="actMontoMinimo()">ACTUALIZAR</button>
-                    <button class="act-monto volver" onclick="volver(this)">VOLVER</button>
+                    <p id="prec-minimo"><?php echo $monto[0]['monto']?></p>
+                    <form action="act-valor.php" method="post">
+                        <label for="nuevo-monto">Ingrese el nuevo monto minimo:</label>
+                        <input type="number" name="nuevoMonto" id="nuevo-monto" target="_blank" required>   
+                        <button class="act-btn" onclick="actMontoMinimo()">ACTUALIZAR</button>
+                        <span class="msj-estado-valor"></span>
+                    </form>
+                    <button class="act-monto volver-adm" onclick="volver(this)">VOLVER</button>
                 </div>
                 <div class="act-log">
                     <p class="act-log titulo-log">Actualizar us o cont</p>
                     <p> Ingrese Usuario y contraseña actual:</p>
                     <form action="actualizar.php" method="post" required>
-                    <span><input type="text" id="actualUsuario" name="actualUsuario" class="form-control" placeholder="Usuario actual" required><input type="password" id="actualClave" name="actualClave" class="form-control" placeholder="Clave actual" required></span>
-                    <p> Ingrese nuevo Usuario y/o contraseña:</p>
-                    <span><input type="text" id="nuevoUsuario" name="nuevoUsuario" class="form-control" placeholder="Nuevo Usuario"><input type="password" id="nuevaClave" name="nuevaClave" class="form-control" placeholder="Nueva Clave" required></span>
+                        <span><input type="text" id="actualUsuario" name="actualUsuario" class="form-control" placeholder="Usuario actual" required><input type="password" id="actualClave" name="actualClave" class="form-control" placeholder="Clave actual" required></span>
+                        <p> Ingrese nuevo Usuario y/o contraseña:</p>
+                        <span><input type="text" id="nuevoUsuario" name="nuevoUsuario" class="form-control" placeholder="Nuevo Usuario"><input type="password" id="nuevaClave" name="nuevaClave" class="form-control" placeholder="Nueva Clave" required></span>
+                        <span class="msj-estado-act"></span>
                     </form>
                     <button class="act-btn" onclick="actUsCon()">ACTUALIZAR</button>
-                    <button class="act-log volver" onclick="volver(this)">VOLVER</button>
+                    <button class="act-log volver-adm" onclick="volver(this)">VOLVER</button>
                 </div>
             </div>
         </section>
@@ -296,6 +307,7 @@ $categoria = null;
 </body>
 </html>
 <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+<script src="jquery-3.7.1.min.js"></script>
 <script src="código.js"></script>
 <script>
 
@@ -329,80 +341,122 @@ $categoria = null;
         }
     });
 
-function uploadCsv(){
+    //Subir archivo CSV
 
-    msjEstado = document.querySelector('.msj-estado');
+    function uploadCsv(){
 
-    event.preventDefault();
+        msjEstado = document.querySelector('.msj-estado');
 
-    var fileInput = document.querySelector('.selec-arch');
-    var file = fileInput.files[0];
+        event.preventDefault();
 
-    if (file) {
+        var fileInput = document.querySelector('.selec-arch');
+        var file = fileInput.files[0];
 
-        var formData = new FormData();
-        formData.append('fileInput', file);
+        if (file) {
 
-        var xhr0 = new XMLHttpRequest();
-        xhr0.open('POST', 'upload.php', true);
+            var formData = new FormData();
+            formData.append('fileInput', file);
 
-        xhr0.onreadystatechange = function () {
-        
-            if (xhr0.status == 200) {
-                msjEstado.innerHTML = xhr0.responseText;
+            var xhr0 = new XMLHttpRequest();
+            xhr0.open('POST', 'upload.php', true);
+
+            xhr0.onreadystatechange = function () {
+            
+                if (xhr0.status == 200) {
+                    msjEstado.innerHTML = xhr0.responseText;
+                    
+                }else if (xhr0.readyState == 4 ){
+                    msjEstado.innerHTML = xhr0.responseText;
+                }
+            };
+
+            xhr0.send(formData);
+
+            var interval = setInterval(function () {
+                if (xhr0.readyState === 1) {
+                    msjEstado.innerHTML='<div class="loader"></div><p>Esto puede demorar unos segundos...</p>';
+                }
+            }, 1000);
+
+            setTimeout(function () {
+                clearInterval(interval);
+            }, 10000);
+
+        } else {
+            msjEstado.innerHTML = 'Seleccione un archivo compatible.';
+        }
+    }
+
+    //actualizar clave / usuario
+
+    function actUsCon(){
+
+        msjEstado = document.querySelector('.msj-estado-act');
+
+        let usuarioActual = document.querySelector('#actualUsuario');
+        let claveActual = document.querySelector('#actualClave');
+
+        const hash = sha256(clave.value);
+
+        if(usuario.value == '<?php echo $log[0]['usuario'] ?>' && hash == '<?php echo $log[0]['clave'] ?>'){
+
+            let usuarioNuevo = document.querySelector('#nuevoUsuario').value;
+            let claveNueva = document.querySelector('#nuevaClave').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "actualizar.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            var datos = "nuevoUsuario=" + usuarioNuevo + "&nuevaClave=" + claveNueva;
+
+            xhr.onreadystatechange = function () {
+            
+            if (xhr.status == 200) {
+                msjEstado.innerHTML = xhr.responseText ;
                 
-            }else if (xhr0.readyState == 4 ){
-                msjEstado.innerHTML = xhr0.responseText;
+            }else if (xhr.readyState == 4 ){
+                msjEstado.innerHTML = xhr.responseText ;
             }
         };
 
-        xhr0.send(formData);
+            xhr.send(datos);
 
-        var interval = setInterval(function () {
-            if (xhr0.readyState === 1) {
-                msjEstado.innerHTML='<div class="loader"></div><p>Esto puede demorar unos segundos...</p>';
-            }
-        }, 1000);
-
-        setTimeout(function () {
-            clearInterval(interval);
-        }, 10000);
-
-    } else {
-        msjEstado.innerHTML = 'Seleccione un archivo compatible.';
+        }
     }
-}
 
+    //actualizar monto
 
-function actUsCon(){
+    function actMontoMinimo(){
 
-    let usuarioActual = document.querySelector('#actualUsuario');
-    let claveActual = document.querySelector('#actualClave');
+        msjEstado = document.querySelector('.msj-estado-valor');
 
-    const hash = sha256(clave.value);
+        let nuevoMonto = document.querySelector('#nuevo-monto').value;
 
-    if(usuario.value == '<?php echo $log[0]['usuario'] ?>' && hash == '<?php echo $log[0]['clave'] ?>'){
-
-        let usuarioNuevo = document.querySelector('#nuevoUsuario').value;
-        let claveNueva = document.querySelector('#nuevaClave').value;
+        event.preventDefault();
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "actualizar.php", true);
+        xhr.open("POST", "act-valor.php", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-        var datos = "nuevoUsuario=" + usuarioNuevo + "&nuevaClave=" + claveNueva;
 
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                console.log('File uploaded successfully.');
-            } else {
-                console.error('Error uploading file.');
+        var datos = "nuevoMonto=" + nuevoMonto
+
+        xhr.onreadystatechange = function () {
+
+            if (xhr.status == 200) {
+                msjEstado.innerHTML = xhr.responseText ;
+                
+            }else if (xhr.readyState == 4 ){
+                msjEstado.innerHTML = xhr.responseText ;
             }
-        };
+        }
 
         xhr.send(datos);
 
-    }
-}
+        $( "#prec-minimo" ).load(window.location.href + " #prec-minimo" );
 
+        nuevoMonto.value="";
+
+        
+    }
 </script>

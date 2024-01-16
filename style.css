@@ -154,8 +154,8 @@ main {
     flex-direction: column;
     background-image: url(img/1bf436788b275088a0072b8a3e4df363.png);
     background-repeat: no-repeat;
-    background-size: 365px;
-    background-position: right 54px top -66px;
+    background-size: 461px;
+    background-position: right 31px top -83px;
 }
 
 .cont-pedido {
@@ -681,7 +681,7 @@ input[type='radio']:checked:after {
     background: var(--c3);
 }
 
-.volver {
+.volver-adm {
     WIDTH: 100px;
     height: 25px;
     margin-bottom: 0;
@@ -692,7 +692,7 @@ input[type='radio']:checked:after {
     letter-spacing: 0.5px;
 }
 
-.volver:hover{
+.volver-adm:hover{
     border: 1px solid var(--c2);
     background: var(--c2);
 }
