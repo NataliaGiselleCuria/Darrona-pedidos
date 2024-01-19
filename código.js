@@ -112,6 +112,20 @@ let logactive = document.querySelector(".login");
 let cerrarLog =  document.querySelector('.fa-solid.fa-xmark');
 let usuario = document.querySelector('#usuario');
 let clave = document.querySelector('#clave');
+let ver = document.querySelector('.fa-regular.fa-eye');
+let noVer = document.querySelector('.fa-regular.fa-eye-slash');
+
+ver.addEventListener('click', () =>{
+    clave.type="text";
+    ver.style.display = "none";
+    noVer.style.display = "block";
+})
+
+noVer.addEventListener('click', () =>{
+    clave.type="password";
+    noVer.style.display = "none";
+    ver.style.display = "block";
+})
 
 //opciones adm
 let actList = document.querySelector('#act-list');
@@ -123,8 +137,6 @@ let actMontoCont = document.querySelectorAll('.act-monto');
 let actLogCont = document.querySelectorAll('.act-log');
 
 //actualizar monto
-
-
 
 actList.addEventListener("click", () =>{
     for (let i = 0; i < opcCont.length; i++){
@@ -225,11 +237,8 @@ function cerrar(){
     botonCerrar.style.display = 'none';
     botonFinalizar.style.display = 'unset';
 
-    if(info.style.height==0){
-        inicio.style.height = '170px'
-    }else{
-        inicio.style.height = '210px'
-    }
+    
+    inicio.style.height = '230px'
     
 }
 
@@ -247,11 +256,8 @@ function categoria(x){
             infoCont.style.opacity = '0';
             infoCont.className = 'info-cont';
 
-            if(info.style.height==0){
-                inicio.style.height = '170px'
-            }else{
-                inicio.style.height = '210px'
-            }
+            inicio.style.height = '170px'
+           
 
         }
 
@@ -277,6 +283,7 @@ function categoria(x){
         }
     }
 }
+
 function verPedido(){
     
     let elEliminar = document.querySelectorAll(".tr-tablaFinal");
@@ -324,6 +331,12 @@ function verPedido(){
     info.style.height = '45px';
     infoCont.style.opacity = '1';
     infoCont.className = 'info-cont-cerrar';
+
+    if(ventanaEnviar.style.height=="0px" || ventanaEnviar.style.height==""){
+        inicio.style.height = '210px'
+    }else{
+        inicio.style.height = '275px'
+    }
     
 }
 
@@ -352,6 +365,8 @@ function rellenarTablaExel(){
     tablaExel.children[0].children[4].append(fecha);
 
     date=fecha;
+
+    console.log(date);
 
 
     for (let i = 0; i < prodTFinal.length; i++) {
@@ -389,10 +404,10 @@ function verificarError(){
 
             rellenarTablaExel();
 
-            const wb = XLSX.utils.table_to_book(tablaExel, {sheet: 'sheet-1'});
+            const wb = XLSX.utils.table_to_book(tablaExel, {sheet: 'sheet-1'});       
   
             /* Export to file (start a download) */
-            XLSX.writeFile(wb, 'Pedido-'+nombre.value+'-'+apellido.value+'-'+date.toLocaleDateString()+'.xlsx');
+            XLSX.writeFile(wb, 'Pedido-'+nombre.value+'-'+apellido.value+'-'+date.innerText+'.xlsx');
            
         }
     }

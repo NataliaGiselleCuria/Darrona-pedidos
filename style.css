@@ -83,13 +83,12 @@ hr{
 }
 
 header {
-    min-height: 15%;
+    min-height: 18%;
     width: 100%;
     margin: auto;
     padding-top: 15px;
     position: fixed;
-    background: white;
-   
+    background: white; 
 }
 
 nav {
@@ -111,9 +110,9 @@ nav {
 
 img.logo {
     position: absolute;
-    top: 5px;
-    left: 120px;
-    height: 145px;
+    top: 14px;
+    left: 76px;
+    height: 162px;
 }
 
 .titulo {
@@ -126,6 +125,19 @@ img.logo {
     font-weight: 300;
     letter-spacing: 1px;
     margin: 3px;
+}
+
+.t1 {
+    font-weight: 300;
+    font-size: larger;
+}
+
+.t2 {
+    font-weight: 400;
+}
+
+.titulo span{
+    display: flex;
 }
 
 h1, h2, h3, p{
@@ -176,6 +188,11 @@ main {
     gap: 20px
 } 
 
+.btn{
+    font-size: 0.9rem;
+    font-family: 'Roboto';
+}
+
 .valor {
     width: 10%;
     justify-content: start;
@@ -193,6 +210,11 @@ main {
     width: 110px;
     height: 30px;
     cursor: pointer;
+    box-shadow: #c1beb861 0 3px 5px 0;
+}
+
+.bt:hover {
+    box-shadow: #c1beb861 0 3px 5px 0;
 }
 
 button.bt.ver-resumen {
@@ -218,7 +240,7 @@ button.bt.enviar-resumen, .fin {
 }
 
 .enviar-pedido, .info-precio{
-    height: 0;
+    height: 0px;
     width: 100%;
     transition: all 1s ; 
     font-family: 'Nunito';  
@@ -315,8 +337,8 @@ p.error {
 
 /* -- CATEGORIAS -- */
 
-section.categorias {
-    width: 17%;
+.categorias {
+    width: 16%;
     display: flex;
     flex-direction: column;
     font-family: 'Roboto';
@@ -334,7 +356,7 @@ section.categorias {
 
 p.cat {
     font-weight: 400;
-    font-size: xx-large;
+    font-size: 1.8rem;
     color: var(--c1);
     padding-left: 20px;
 }
@@ -382,6 +404,7 @@ a {
     display: flex;
     width: 100%;
     cursor: pointer;
+    text-decoration: none;
 }
 
 /* -- TABLA -- */
@@ -389,7 +412,7 @@ a {
 .tabla {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 80%;
     gap: 10px;
     font-family: 'Roboto';
     
@@ -445,19 +468,17 @@ tr.li-prod, tr.tr-tablaFinal {
 }
 
 .prod{
-    width: 350px;
-    max-width: 350px;
+    width: 20%;
+    max-width: 20%;
 }
 
 .colum-min {
-    width: 100px;
-    max-width: 100px;
+    width: 10%;
+    max-width: 10%;
 }
 
 .colum-cen{
     text-align: center;
-    width: 100px;
-    max-width: 100px;
 }
 
 .smaller{
@@ -578,7 +599,7 @@ input[type='radio']:checked:after {
 
 .popupbody {
     width: auto;
-    height: auto;
+    height: 60%;
     border-radius: 10px;
     background-color: white;
     position: relative;
@@ -587,6 +608,12 @@ input[type='radio']:checked:after {
     font-size: small;
     font-weight: 300;
     box-shadow: 5px 5px 10px #88888882;
+    background-image: url(img/90372247_106218944345635_1750925632478380032_n.jpg);
+    background-position: 186px 0px;
+    background-size: 1100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .cerrar-log {
@@ -596,17 +623,16 @@ input[type='radio']:checked:after {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    position: absolute;
+    top: 0;
 }
-
 
 .login-cont, .opc-cont, .act-list, .act-monto, .act-log {
     width: 400px;
-    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center; 
-    margin-bottom: 40px 
 }
 
 .titulo-log {
@@ -635,20 +661,47 @@ input[type='radio']:checked:after {
 .login-cont span input{
     border: 1px solid var(--c1);
     border-radius: 5px;
-    height: 17px;
+    height: 20px;
+    background: transparent;
 }
 
-.ingresar {
-    margin-top: 10px;
+.ver {
+    position: absolute;
+    top: 315px;
+    right: 128px;
+    color: #888888;
 }
 
-.adm{
-    text-decoration: underline;
-    text-underline-position: under;
+.fa-regular.fa-eye-slash{
+    display: none;
 }
 
-.adm:hover{
-    color: var(--c4);
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+p.log-error {
+    height: 20px;
+}
+
+.btn-simple{
+    width: auto;
+    background-color: transparent;
+    border: 1px solid #c1c3c5;
+    color: #888888;
+    cursor: pointer;
+    padding: 5px 16px;
+    text-align: center;
+    font-family: 'Roboto';
+    font-size: small;
+    font-weight: 300;
+}
+
+.btn-simple:hover{
+    box-shadow: rgba(0, 0, 0, .2) 0 2px 3px;
 }
 
 /* -- LOGIN - OPC -- */
@@ -658,27 +711,71 @@ input[type='radio']:checked:after {
 }
 
 .opc-list {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
+    margin: 40px 0;
+    gap: 25px;
 }
 
-.opc-adm.opc-bt {
-    height: 30px;
-    width: 340px;
-    align-items: center;
-    justify-content: center;
+.btn-adm {
+    margin-top: 5px;
     border: none;
-    background: none;
-    font-family: 'Roboto';
-    font-weight: 300;
+    display: inline-block;
+    padding: 7px 25px;
+    border-radius: 8px;
+    color: #fff;
+    FONT-FAMILY: 'Roboto';
     letter-spacing: 1px;
-    cursor: pointer;
+    transition: all .5s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: #c1beb861 0 3px 5px 0;
 }
 
-.opc-adm.opc-bt:hover {
-    background: var(--c3);
+.btn-adm:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #9fafa89c;
+    border-radius: 8px;
+    z-index: -2;
+}
+
+.btn-adm:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: var(--c1);
+    transition: all .3s;
+    border-radius: 8px;
+    z-index: -1;
+}
+.btn-adm:hover {
+    color: #fff;
+    &:before {
+      width: 100%;
+    }
+}
+
+.opc-list .btn-adm {
+    background-color: var(--c1);
+    width: 87%;
+    margin: auto;
+    justify-content: center;
+    padding: 15px;
+    font-size: 0.85rem;
+}
+
+.opc-list .btn-adm:before {
+    background: var(--c2);
 }
 
 .volver-adm {
@@ -697,31 +794,102 @@ input[type='radio']:checked:after {
     background: var(--c2);
 }
 
-
-
 /* -- UPLOAD -- */
 
-form.form-upload {
+.p-importante {
+    font-weight: 400;
+    color: var(--c2);
+    letter-spacing: 0.7px;
+}
+
+.p-importante i.fa-solid.fa-triangle-exclamation {
+    color: var(--c4);
+}
+
+.act-list.span-txt {
+    gap: 10px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 10px;
+}
+
+.act-list.span-txt div{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.int-btn {
+    background-color: transparent;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: #c1beb861 0 3px 5px 0;
+    box-sizing: border-box;
+    color: #0f1111;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Nunito';
+    line-height: 30px;
+    padding: 0 20px;
+    letter-spacing: 0.5px;
+}
+
+.int-btn:hover {
+    border: 1px solid #c1beb8;
+    background-color: #c1beb8;
+    color: white;
+}
+
+.int-btn:focus {
+    border: 1px solid  #c1beb8; 
+}
+
+.form-upload, .form-monto, .form-log {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin: 25px 0;
+    width: 80%;
+    display: flex;
+    align-items: center;
 }
 
-.selec-arch {
-    font-family: 'Roboto';
+input#fileInput {
+    margin-top: -5px;
+    text-align-last: center;
+    font-family: 'Nunito';
+    letter-spacing: 0.2px;
+    color: #a7a3a3;
 }
 
 input[type="file"]::-webkit-file-upload-button{
-    border: 1px solid var(--c3);
-    border-radius: 2px;
-    background-color: var(--c3);
-    cursor: pointer;
+    display: none;
 }
 
-input[type="file"]::-webkit-file-upload-button:hover{
-    border: 1px solid var(--c4);
-    background-color: var(--c4);
+label.int-btn {
+    width: 60%;
+    text-align: center;
+    font-weight: 400;
+    font-size: 0.85rem;
+    border: 1px solid var(--c3);
+}
+
+label.int-btn:hover {
+    background: var(--c3);
+    border: 1px solid var(--c3);
+}
+
+input.int-btn{
+    background-color: white;
+}
+
+input.int-btn:hover, input.int-btn:focus{
+    border: 1px solid var(--c3);
+    background-color: white;
+    color: inherit;
+
+}
+.selec-arch {
+    font-family: 'Roboto';
 }
 
 .msj-estado {
@@ -739,7 +907,28 @@ input[type="file"]::-webkit-file-upload-button:hover{
       conic-gradient(#0000 30%,#ffa516);
     -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
     animation: l13 1s infinite linear;
-  }
-  @keyframes l13{ 
+}
+
+@keyframes l13{ 
     100%{transform: rotate(1turn)}
-  }
+}
+
+/* -- MONTO -- */
+
+.span-actual {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* -- ACT-LOG -- */
+
+.form-log span{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.form-log span input {
+    width: 45%;
+}
+

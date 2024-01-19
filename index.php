@@ -29,7 +29,6 @@ $sql6 = $con->prepare("SELECT * FROM montominimo");
 $sql6->execute();
 $monto = $sql6->fetchAll(PDO::FETCH_ASSOC);
 
-print_r($monto);
 
 $categoria = null;
 ?>
@@ -41,6 +40,7 @@ $categoria = null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="normalize.css">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,300;0,400;0,500;1,200&display=swap;family=Montserrat:wght@100;200;300;400&amp;family=Nunito:wght@200;300;400;500&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <title>Darrona Alimentos Naturales</title>
     <meta name="description" content="Hacé tu pedido de productos de dietética naturales en Distribuidora Darrona">
@@ -57,7 +57,7 @@ $categoria = null;
                 <div class="titulo">
                     <h1 class="t1">Pedidos Dietética Darrona</h1>
                     <h2 class="t2">LISTA DE PRECIOS MAYORISTA</h2>
-                    <p class="t3">COMPRA MINIMA $</p><p id="prec-minimo t3"><?php echo $monto[0]['monto']?></p>
+                    <span><p class="t3">COMPRA MINIMA $</p><p id="prec-minimo t3"><?php echo $monto[0]['monto']?></p></span>
                 </div>
             </div>
         </nav>
@@ -71,7 +71,7 @@ $categoria = null;
                     <p class="total"></p>
                 </span>
                 <span class="btn">
-                    <button class="bt volver" onclick="categoria('TODOS LOS PRODUCTOS')">VOLVER</button>
+                    <button class=" bt volver" onclick="categoria('TODOS LOS PRODUCTOS')">VOLVER</button>
                     <button class="bt ver-resumen" onclick="verPedido()">VER PEDIDO</button>
                     
                     <button class="bt fin" onclick="abrirVentana(), verPedido()" >FINALIZAR</button>
@@ -227,7 +227,7 @@ $categoria = null;
                     <th class="cab cab-total colum-cen">Precio Total x Producto</th>
                 </tr>
             </table>
-            <table class="cont-t tablaExel hidden">
+            <table class="cont-t tablaExcel hidden">
                 <tr><td>Nombre</td></tr>
                 <tr><td>Apellido</td></tr>
                 <tr><td>Horarios</td></tr>
@@ -253,53 +253,75 @@ $categoria = null;
                     </span>
                     <span class="label">
                         <label for="clave">Contraseña<p class="asterisco"> * </p>:</label>
-                        <input type="password" id="clave" name="clave" class="form-control" required>
+                        <input type="password" id="clave" name="clave" class="form-control" required>                       
+                            <i class="ver fa-regular fa-eye"></i>
+                            <i class="ver fa-regular fa-eye-slash"></i> 
+                        </input>                      
                     </span>
                     <span class="label"><p class="log-error"></p></span>
-                    <p class="ingresar"><a class="adm">INGRESAR</a></p>
+                    <p class="btn-simple ingresar"><a class="adm">INGRESAR</a></p>
                 </div>
                 <div class="opc-adm opc-cont">
                     <p class="titulo-log">BIENVENIDO</p>
                     <span class="opc-list">
-                        <button id="act-list" class="opc-adm opc-bt">ACTUALIZAR LISTADO DE PRODUCTOS</button>
-                        <button id="act-monto" class="opc-adm opc-bt">ACTUALIZAR VALOR MINIMO DE COMPRA</button>
-                        <button id="act-log" class="opc-adm opc-bt">CAMBIAR USUARIO O CONTRASEÑA</button>
+                        <button id="act-list" class="opc-adm btn-adm">- ACTUALIZAR LISTADO DE PRODUCTOS -</button>
+                        <button id="act-monto" class="opc-adm btn-adm">- ACTUALIZAR VALOR MINIMO DE COMPRA -</button>
+                        <button id="act-log" class="opc-adm btn-adm">- CAMBIAR USUARIO O CONTRASEÑA -</button>
                     </span>
                 </div>
                 <div class="act-list">
                     <p class="act-list titulo-log">Actualizar Lista</p>
-                    <p> </p>
+                    <span class="act-list span-txt">
+                        <p class="p-importante"><i class="fa-solid fa-triangle-exclamation"></i> IMPORTANTE</p>                      
+                        <div>
+                            <p>Para que la tabla se actualice de forma correcta:</p>
+                            <p>- Descargar el siguiente Excel.</p>
+                            <p>- No modificar el nombre de la cabecera.</p>
+                            <p>- Rellenar el contenido de la tabla con la lista actualizada</p>
+                            <p>- Guardar el archivo en formato CSV.</p>
+                            <p>- Mantener siempre el nombe del archivo 'productos'</p>
+                        </div>
+                    </span>
+                    <span>
+                        <a href="excel/productos.xlsx" download="productos.xlsx">
+                            <button class="int-btn descargar">Descargar Exel</button>
+                        </a>
+                    </span>
+                    
                     <form class="form-upload" action="upload.php" method="post" enctype="multipart/form-data" target="_blank" required>
-                        <label for="fileInput">Selecciona un archivo CSV:</label>
+                        <p class="p-importante">Adjuntar el archivo modificado:</p>
+                        <label class="int-btn" for="fileInput"><i class="fa-regular fa-folder-open"></i> Archivo CSV:</label>
                         <input class="selec-arch" type="file" name="fileInput" id="fileInput" accept=".csv" required>
-                        <button onclick="uploadCsv()">IMPORTAR</button>
+                        <button class="btn-adm" onclick="uploadCsv()">IMPORTAR</button>
                         <span class="msj-estado"></span>
                     </form>
-                    <button class="act-list volver-adm" onclick="volver(this)">VOLVER</button>
+                    <button class="act-list btn-simple" onclick="volver(this)">VOLVER</button>
                 </div>
                 <div class="act-monto">
-                    <p class="act-monto titulo-log">Actializar Monto Minimo</p>
+                <p class="act-monto titulo-log">Actializar Monto Minimo</p>
+                    <span class="span-actual">                 
                     <p> Valor actual del minimo de compra:</p>
-                    <p id="prec-minimo"><?php echo $monto[0]['monto']?></p>
-                    <form action="act-valor.php" method="post">
-                        <label for="nuevo-monto">Ingrese el nuevo monto minimo:</label>
-                        <input type="number" name="nuevoMonto" id="nuevo-monto" target="_blank" required>   
-                        <button class="act-btn" onclick="actMontoMinimo()">ACTUALIZAR</button>
+                    <p class="p-importante" id="prec-minimo"><?php echo $monto[0]['monto']?></p>
+                    </span>
+                    <form class="form-monto" action="act-valor.php" method="post">
+                        <label class="p-importante" for="nuevo-monto">Ingrese el nuevo monto minimo:</label>
+                        <input class="int-btn" type="number" name="nuevoMonto" id="nuevo-monto" target="_blank" required>   
+                        <button class=" btn-adm" onclick="actMontoMinimo()">ACTUALIZAR</button>
                         <span class="msj-estado-valor"></span>
                     </form>
-                    <button class="act-monto volver-adm" onclick="volver(this)">VOLVER</button>
+                    <button class="act-monto btn-simple" onclick="volver(this)">VOLVER</button>
                 </div>
                 <div class="act-log">
-                    <p class="act-log titulo-log">Actualizar us o cont</p>
-                    <p> Ingrese Usuario y contraseña actual:</p>
-                    <form action="actualizar.php" method="post" required>
-                        <span><input type="text" id="actualUsuario" name="actualUsuario" class="form-control" placeholder="Usuario actual" required><input type="password" id="actualClave" name="actualClave" class="form-control" placeholder="Clave actual" required></span>
-                        <p> Ingrese nuevo Usuario y/o contraseña:</p>
-                        <span><input type="text" id="nuevoUsuario" name="nuevoUsuario" class="form-control" placeholder="Nuevo Usuario"><input type="password" id="nuevaClave" name="nuevaClave" class="form-control" placeholder="Nueva Clave" required></span>
+                    <p class="act-log titulo-log">Actualizar us o cont</p>                    
+                    <form class="form-log" action="actualizar.php" method="post" required>
+                        <p class="p-importante"> Ingrese Usuario y contraseña actual:</p>
+                        <span><input class="int-btn" type="text" id="actualUsuario" name="actualUsuario" class="form-control" placeholder="Usuario actual" required><input class="int-btn" type="password" id="actualClave" name="actualClave" class="form-control" placeholder="Clave actual" required></span>
+                        <p class="p-importante"> Ingrese nuevo Usuario y/o contraseña:</p>
+                        <span><input class="int-btn" type="text" id="nuevoUsuario" name="nuevoUsuario" class="form-control" placeholder="Nuevo Usuario"><input class="int-btn" type="password" id="nuevaClave" name="nuevaClave" class="form-control" placeholder="Nueva Clave" required></span>
                         <span class="msj-estado-act"></span>
-                    </form>
-                    <button class="act-btn" onclick="actUsCon()">ACTUALIZAR</button>
-                    <button class="act-log volver-adm" onclick="volver(this)">VOLVER</button>
+                        <button class="btn-adm" onclick="actUsCon()">ACTUALIZAR</button>
+                    </form>                   
+                    <button class="act-log btn-simple" onclick="volver(this)">VOLVER</button>
                 </div>
             </div>
         </section>
@@ -459,4 +481,5 @@ $categoria = null;
 
         
     }
+
 </script>
