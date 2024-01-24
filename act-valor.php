@@ -13,9 +13,9 @@ $nuevoMonto = $_POST['nuevoMonto'];
 $sql5 = "UPDATE `montominimo` SET `monto`='$nuevoMonto' WHERE `id`=1";
 
 if ($con->query($sql5)) {
-    echo "Actualización exitosa";
+    echo '<i class="fa-solid fa-check"></i>';
 } else {
-    echo "Error al actualizar: " . $con->errorInfo()[2];
+    echo '<i class="fa-solid fa-xmark"></i> Error al actualizar: ' . $con->errorInfo()[2];
 }
 
 

@@ -115,9 +115,12 @@ $categoria = null;
                         </div>
                     </form>
                     <div class="fila btn">
+                        <span>
                         <label><input class="check-pedido" type="checkbox" id="check">Revisaste tu pedido? Una vez enviado no podrá modificarse.</label>
+                        <p>Tu pedido se descargará automaticamente</p>
+                        </span>
                         <span class="btn e">
-                            <button class="bt enviar" onclick="verificarError()">ENVIAR</button>
+                            <button class="bt enviar" onclick="verificarError()">DESCARGAR</button>
                         </span>
                     </div>
                     <p class="error"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingrese todos los datos y confirme haber revisado el pedido.</p>
@@ -128,6 +131,7 @@ $categoria = null;
     </header>
     <section id="inicio"></section>
     <main>
+        
         <a href="#inicio" class="inicio"><i class="fa-solid fa-arrow-up"></i></a>
         <a href="https://wa.me/5492215952475?text=Hola%20Darrona!%20" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
         <section class="categorias">
@@ -151,11 +155,16 @@ $categoria = null;
             </div>
         </section>
         <section class="tabla">
-            <div class="titulo-cat">
+            
+            <table class="cont-t">
+            <div class="titulo-cat">  
                 <p class="cat-selec">TODOS LOS PRODUCTOS</p>
+                <div class="tool-tip">
+                    <div class="tool-tip-cont"></div>
+                    <div class="tool-tip-cont-arrow"></div>
+                </div>
                 <!-- <p class="alert-pedido">ingrese su pedido</p> -->
             </div>
-            <table class="cont-t">
                 <tr class="productos">
                     <?php
                     foreach ($cabecera as $column) {
@@ -316,12 +325,25 @@ $categoria = null;
                     <form class="form-log" action="actualizar.php" method="post" required>
                         <p class="p-importante"> Ingrese Usuario y contraseña actual:</p>
                         <span><input class="int-btn" type="text" id="actualUsuario" name="actualUsuario" class="form-control" placeholder="Usuario actual" required><input class="int-btn" type="password" id="actualClave" name="actualClave" class="form-control" placeholder="Clave actual" required></span>
+                        <i class="ver log fa-regular fa-eye"></i>
+                        <i class="ver log fa-regular fa-eye-slash"></i>
                         <p class="p-importante"> Ingrese nuevo Usuario y/o contraseña:</p>
                         <span><input class="int-btn" type="text" id="nuevoUsuario" name="nuevoUsuario" class="form-control" placeholder="Nuevo Usuario"><input class="int-btn" type="password" id="nuevaClave" name="nuevaClave" class="form-control" placeholder="Nueva Clave" required></span>
-                        <span class="msj-estado-act"></span>
+                        <i class="ver log fa-regular fa-eye"></i>
+                        <i class="ver log fa-regular fa-eye-slash"></i>
                         <button class="btn-adm" onclick="actUsCon()">ACTUALIZAR</button>
+                        <span class="msj-estado-act"></span>
                     </form>                   
                     <button class="act-log btn-simple" onclick="volver(this)">VOLVER</button>
+                </div>
+            </div>
+        </section>
+        <section class="redireccion">
+            <div class="popupbody redire">
+                <div class="redir-cont">
+                    <p>Vamos a redirecconarte a nuestro chat de WhatsApp.</p>
+                    <p>Por favor, adjunta el pedido que se acaba de descargar automaticamente.</p>
+                    <p class="btn-simple ir-wapp"><a class="adm">OK</a></p>   
                 </div>
             </div>
         </section>
@@ -332,10 +354,6 @@ $categoria = null;
 <script src="jquery-3.7.1.min.js"></script>
 <script src="código.js"></script>
 <script>
-
-    window.addEventListener('beforeunload', function (event) {
-        event.preventDefault();
-    });
 
     // secciones adm
     let logCont = document.querySelector('.login-cont');
@@ -413,42 +431,41 @@ $categoria = null;
 
     function actUsCon(){
 
+        event.preventDefault();
+
         msjEstado = document.querySelector('.msj-estado-act');
 
-        let usuarioActual = document.querySelector('#actualUsuario');
-        let claveActual = document.querySelector('#actualClave');
+        const hash = sha256(claveActual.value);
 
-        const hash = sha256(clave.value);
-
-        if(usuario.value == '<?php echo $log[0]['usuario'] ?>' && hash == '<?php echo $log[0]['clave'] ?>'){
-
-            let usuarioNuevo = document.querySelector('#nuevoUsuario').value;
-            let claveNueva = document.querySelector('#nuevaClave').value;
+        if(usuarioActual.value == '<?php echo $log[0]['usuario'] ?>' && hash == '<?php echo $log[0]['clave'] ?>'){
 
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "actualizar.php", true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-            var datos = "nuevoUsuario=" + usuarioNuevo + "&nuevaClave=" + claveNueva;
+            var datos = "nuevoUsuario=" + usuarioNuevo.value + "&nuevaClave=" + claveNueva.value;
 
             xhr.onreadystatechange = function () {
-            
-            if (xhr.status == 200) {
-                msjEstado.innerHTML = xhr.responseText ;
-                
-            }else if (xhr.readyState == 4 ){
-                msjEstado.innerHTML = xhr.responseText ;
-            }
-        };
+                if (xhr.status == 200) {
+                    msjEstado.innerHTML = xhr.responseText ;
+                    
+                }else if (xhr.readyState == 4 ){
+                    msjEstado.innerHTML = xhr.responseText ;
+                }
+            };
 
             xhr.send(datos);
 
+        }else{
+            msjEstado.innerHTML = '<i class="fa-solid fa-xmark"></i><p> Usuario y/o clave actual incorrecta.</p>'
         }
     }
 
     //actualizar monto
 
     function actMontoMinimo(){
+
+
 
         msjEstado = document.querySelector('.msj-estado-valor');
 

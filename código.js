@@ -25,11 +25,10 @@ function totalProd(){
     
     for (let i = 0; i < cant.length; i++) {
 
-        
-        // valorProd = cant[i].parentElement.previousElementSibling.previousElementSibling.innerHTML.slice(1);
         totalProd = (Number(cant[i].value) * Number(precR[i].innerHTML.replace(/[^0-9.-]+/g,"")))*1000;
-        
-        
+
+        console.log(totalProd)
+           
         if(valorProd!="-"){
             if(totalProd!==0){
                 totalPedProd[i].innerHTML = format.format(totalProd);
@@ -45,26 +44,34 @@ function totalProd(){
 }
 
 function sumarTotal(){
-    total.innerText = format.format(0);
-    let totalPedido = 0
-    let tpp = 0
+    let totalPedido = null
+    let tpp = null
 
     for (let i = 0; i < totalPedProd.length; i++) {
+
         if(totalPedProd[i].innerHTML!="-"){
-            tpp= (Number(totalPedProd[i].innerHTML.replace(/[^0-9.-]+/g,"")))*1000;
+
+            tpp= (Number(totalPedProd[i].innerHTML.replace(/[^0-9-]+/g,"")))/100;
+            console.log(tpp);
             totalPedido+=tpp
+            console.log(format.format(totalPedido));
         } 
     }
     
-    total.innerText = format.format(totalPedido);
+    total.innerHTML = format.format(totalPedido);
 }
 
 function radio(x){
     let precRadio = 0;
     if(x.value=='uni'){
         precRadio=x.parentElement.previousElementSibling.previousElementSibling.innerHTML.slice(1);
-    }else{
-        precRadio=x.parentElement.previousElementSibling.innerHTML.slice(1);
+          
+    }else{    
+        precRadio=x.parentElement.previousElementSibling.innerHTML.slice(1);   
+    }
+
+    if(precRadio=='-' || precRadio==0){
+        precRadio="0";
     }
 
     x.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML=precRadio;
@@ -103,29 +110,59 @@ horarios.addEventListener('keyup', habilitarEnviar);
 telefono.addEventListener('keyup', habilitarEnviar);
 check.addEventListener('change', habilitarEnviar);
 
-//rellenar exel
-let tablaExel =  document.querySelector('.cont-t.tablaExel');
+//rellenar excel y redireccion
+let tablaExcel =  document.querySelector('.cont-t.tablaExcel');
+let redir = document.querySelector('.redireccion');
+let irwapp = document.querySelector('.ir-wapp');
 
-//inicio Darrona
+irwapp.addEventListener("click", ()=>{
+    location.href ="https://wa.me/5491155722648?text=Hola%20Darrona!%20Adjunto%20el%20pedido%20generado%20por%20la%20web%20..."
+})
+
+//inicio Darrona y act log
 let logo = document.querySelector('.logo');
 let logactive = document.querySelector(".login");
 let cerrarLog =  document.querySelector('.fa-solid.fa-xmark');
 let usuario = document.querySelector('#usuario');
 let clave = document.querySelector('#clave');
-let ver = document.querySelector('.fa-regular.fa-eye');
-let noVer = document.querySelector('.fa-regular.fa-eye-slash');
+let ver = document.querySelectorAll('.fa-regular.fa-eye');
+let noVer = document.querySelectorAll('.fa-regular.fa-eye-slash');
+let usuarioActual = document.querySelector('#actualUsuario');
+let claveActual = document.querySelector('#actualClave');
+let usuarioNuevo = document.querySelector('#nuevoUsuario');
+let claveNueva = document.querySelector('#nuevaClave');
 
-ver.addEventListener('click', () =>{
-    clave.type="text";
-    ver.style.display = "none";
-    noVer.style.display = "block";
-})
+for (let i = 0; i < ver.length; i++){
+    ver[i].addEventListener('click', () =>{
+        ver[i].style.display = "none";
+        noVer[i].style.display = "block";
 
-noVer.addEventListener('click', () =>{
-    clave.type="password";
-    noVer.style.display = "none";
-    ver.style.display = "block";
-})
+        if(i==0){
+            clave.type="text";
+        }else if(i==1){
+            claveActual.type="text";
+        }else{
+            claveNueva.type="text";
+        }
+        
+    })
+}
+
+for (let i = 0; i < noVer.length; i++){
+    noVer[i].addEventListener('click', () =>{
+        
+        noVer[i].style.display = "none";
+        ver[i].style.display = "block";
+
+        if(i==0){
+            clave.type="password";
+        }else if(i==1){
+            claveActual.type="password";
+        }else{
+            claveNueva.type="password";
+        }
+    })
+}
 
 //opciones adm
 let actList = document.querySelector('#act-list');
@@ -340,29 +377,29 @@ function verPedido(){
     
 }
 
-function rellenarTablaExel(){
+function rellenarTablaExcel(){
 
     let prodTFinal = document.querySelectorAll(".tr-tablaFinal");
 
     let nom = document.createElement('TD');
     nom.innerHTML = nombre.value;
-    tablaExel.children[0].children[0].appendChild(nom);
+    tablaExcel.children[0].children[0].appendChild(nom);
 
     let ap = document.createElement('TD');
     ap.innerHTML = apellido.value;
-    tablaExel.children[0].children[1].append(ap);
+    tablaExcel.children[0].children[1].append(ap);
 
     let hor = document.createElement('TD');
     hor.innerHTML = horarios.value;
-    tablaExel.children[0].children[2].append(hor); 
+    tablaExcel.children[0].children[2].append(hor); 
 
     let tel = document.createElement('TD');
     tel.innerHTML = telefono.value;
-    tablaExel.children[0].children[3].append(tel)
+    tablaExcel.children[0].children[3].append(tel)
 
     let fecha = document.createElement('TD');
     fecha.innerHTML = new Date().toLocaleDateString();
-    tablaExel.children[0].children[4].append(fecha);
+    tablaExcel.children[0].children[4].append(fecha);
 
     date=fecha;
 
@@ -382,7 +419,7 @@ function rellenarTablaExel(){
         itemProducto.append(cant);
         itemProducto.append(prod);
 
-        tablaExel.childNodes[1].appendChild(itemProducto);
+        tablaExcel.childNodes[1].appendChild(itemProducto);
     }
 }
 
@@ -402,13 +439,13 @@ function verificarError(){
     if(nombre.value!='' && apellido.value!='' && horario.value!='' && telefono.value!='' && check.checked==true){
         if (error.style.display == "none"){
 
-            rellenarTablaExel();
+            rellenarTablaExcel();
 
-            const wb = XLSX.utils.table_to_book(tablaExel, {sheet: 'sheet-1'});       
+            const wb = XLSX.utils.table_to_book(tablaExcel, {sheet: 'sheet-1'});       
   
-            /* Export to file (start a download) */
             XLSX.writeFile(wb, 'Pedido-'+nombre.value+'-'+apellido.value+'-'+date.innerText+'.xlsx');
-           
+
+            redir.classList.toggle("redir-active"); 
         }
     }
 
@@ -444,8 +481,6 @@ function volver(el){
     }
 
 }
-
-
 
 habilitarEnviar();
 

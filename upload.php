@@ -18,7 +18,7 @@ $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
         $uploadOk = 0;
     } else{
         if ($uploadOk == 0) {
-            echo '<i class="fa-solid fa-xmark"></i>Fallo en la carga del archivo.';
+            echo '<i class="fa-solid fa-xmark"></i> Fallo en la carga del archivo.';
     
         } else { 
     
@@ -26,7 +26,7 @@ $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
             if ($con->query($truncateQuery)) {
                 
             } else {
-                echo "Error al limpiar la tabla: " . $con->errorInfo()[2];
+                echo '<i class="fa-solid fa-xmark"></i> Error al limpiar la tabla: ' . $con->errorInfo()[2];
                 exit; // Stop execution if cleaning the table fails
             }
     
@@ -56,7 +56,7 @@ $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
             fclose($csvFile);
             $con = null;
     
-            echo '<i class="fa-solid fa-check"></i>Archivo importado exitosamente.';
+            echo '<i class="fa-solid fa-check"></i>';
         }
     }
 
