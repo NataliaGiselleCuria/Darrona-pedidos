@@ -113,6 +113,7 @@ img.logo {
     top: 14px;
     left: 4%;
     height: 162px;
+    transition: all 0.5s;
 }
 
 .titulo {

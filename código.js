@@ -94,6 +94,7 @@ let ventanaEnviarCont = document.querySelector('.enviar-cont');
 let botonFinalizar = document.querySelector('.bt.fin');
 let botonCerrar = document.querySelector('.bt.cerrar');
 let inicio = document.querySelector('#inicio');
+let logobanner = document.querySelector('.logo');
 
 //ver pedido
 let botonVerPedido = document.querySelector('.bt.ver-resumen');
@@ -270,8 +271,6 @@ function abrirVentana(){
     ventanaEnviarCont.className = 'enviar-cont-cerrar';
     botonFinalizar.style.display = 'none';
     botonCerrar.style.display = 'unset';
-
-    //inicio.style.height = '275px';
       
 }
 
@@ -283,8 +282,13 @@ function cerrar(){
     botonCerrar.style.display = 'none';
     botonFinalizar.style.display = 'unset';
 
-    
     inicio.style.height = '195px'
+
+    if(info.style.display!="none"){
+        logo.style.height = '140px';
+    }else{
+        logo.style.height = '162px';
+    }
     
 }
 
@@ -298,6 +302,7 @@ function categoria(x){
             tabla.style.display = 'inline-table';
             botonVerPedido.style.display = 'block';
             botonVolver.style.display = 'none';
+            info.style.display = 'none';
             info.style.height = '0px';
             infoCont.style.opacity = '0';
             infoCont.className = 'info-cont';
@@ -310,7 +315,14 @@ function categoria(x){
             }
         }
 
-        inicio.style.height = '170px'
+        if(ventanaEnviarCont.style.display=="flex"){
+            inicio.style.height = '230px'; 
+            logo.style.height = '140px'; 
+        }else{
+            inicio.style.height = '170px'
+            logo.style.height = '162px'; 
+        }
+        
         
     }else{
         cate = x.innerText;
@@ -377,10 +389,13 @@ function verPedido(x){
     infoCont.style.opacity = '1';
     infoCont.className = 'info-cont-cerrar';
 
+    logo.style.height = '140px'
+
     if(x==1){
-        inicio.style.height = '195px'
+        inicio.style.height = '195px';
+        logo.style.height = '140px';
     } else{
-        inicio.style.height = '275px'
+        inicio.style.height = '275px'; 
     }
     
     
