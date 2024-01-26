@@ -83,7 +83,7 @@ hr{
 }
 
 header {
-    min-height: 19.5%;
+    min-height: 175px;
     width: 100%;
     margin: auto;
     padding-top: 15px;
@@ -111,7 +111,7 @@ nav {
 img.logo {
     position: absolute;
     top: 14px;
-    left: 76px;
+    left: 4%;
     height: 162px;
 }
 
@@ -153,7 +153,7 @@ main {
     display: flex;
     width: 95%;
     margin: auto;
-    margin-top: 25px;
+    margin-top: 15px;
     align-items: flex-start; 
 }
 
@@ -166,8 +166,8 @@ main {
     flex-direction: column;
     background-image: url(img/1bf436788b275088a0072b8a3e4df363.png);
     background-repeat: no-repeat;
-    background-size: 520px;
-    background-position: right 7px top -83px;
+    background-size: 545px;
+    background-position: right -75px top -83px;
 }
 
 .cont-pedido {
@@ -175,9 +175,8 @@ main {
     margin: auto;
     width: 80%;
     padding: 17px;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 260px;
     font-family: 'Nunito', sans-serif;
     color: var(--c1);
     font-size: large;
@@ -190,7 +189,7 @@ main {
 
 .btn{
     font-size: 0.9rem;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
 }
 .valor {
     width: 10%;
@@ -241,7 +240,7 @@ button.bt.enviar-resumen, .fin {
     height: 0px;
     width: 100%;
     transition: all 1s ; 
-    font-family: 'Nunito';  
+    font-family: 'Nunito', sans-serif; 
     font-size: 0.9rem;
 }
 
@@ -255,11 +254,11 @@ button.bt.enviar-resumen, .fin {
 }
 
 .enviar-cont, .enviar-cont-cerrar {
-    margin-right: 125px;
     margin-top: 10px;
     align-items: center;
-    display: flex;
+    display: none;
     justify-content: center;
+    gap: 40px;
 }
 
 .enviar-cont, .info-cont{
@@ -306,14 +305,15 @@ form{
 
 .fila.btn {
     align-items: center;
+    justify-content: flex-start;
     gap: 15px;
     margin-left: 15px;
+    width: 35%;
 }
 
 .fila.btn label {
     width: 100%;
     display: flex;
-    justify-content: center;
     gap: 5px;
 }
 
@@ -335,10 +335,7 @@ form{
 
 p.error {
     display: none;
-    position: absolute;
-    top: 185px;
-    right: 720px;
-    color: var(--c4);
+    color: var(--c4)!important;
 }
 
 /* -- CATEGORIAS -- */
@@ -348,9 +345,10 @@ p.error {
     width: 16%;
     display: flex;
     flex-direction: column;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     justify-content: flex-start;
     align-items: flex-start;
+    margin-top: 10px;
 }
 
 .cat-buscador {
@@ -431,19 +429,61 @@ a {
     padding-top: 1px;
 }
 
+/* -- TOOL-TIP -- */
+
+.tool-div{
+    width: 42.5%;
+    height: 100%;
+}
+
+.tool-tip-cont {
+    width: 57%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tool-tip{
+    height: 30px;
+    width: max-content;
+    padding: 10px;
+    gap: 10px;
+    align-self: center;
+    box-shadow: #c1beb861 0 3px 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid var(--c4);
+    color: var(--c4);
+    font-size: 0.9rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+.tool-arrow {
+    align-self: center;
+    border-bottom: 0 solid transparent;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--c4);
+}
+
+.cerrar-tool{
+    cursor: pointer;
+}
+
 /* -- TABLA -- */
 
 .tabla {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 95%;
     gap: 10px;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     
 }
 
 .titulo-cat {
-    height: 30px;
+    height: 40px;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -454,27 +494,10 @@ p.cat-selec {
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-size: x-large;
     color: #d79e3d;
-    width: 70%;
-}
-
-.tool-tip{
-    width: 30%;
-    height: 100%;
-}
-
-.tool-tip-cont{
-    height: 100%;
-    width: 60%;
-    box-shadow: #c1beb861 0 3px 5px 0;
-    background: var(--c1);
-}
-
-.tool-tip-cont-arrow{
-    background: var(--c1);
-
+    width: 100%;
 }
 
 .cont-t {
@@ -490,7 +513,7 @@ tbody {
     background-color: #9FAFA8;
     width: 80%;
     color: white;
-    font-family: 'Nunito';
+    font-family: 'Nunito', sans-serif;
 }
 
 .cabecera {
@@ -499,7 +522,7 @@ tbody {
     align-items: center;
     height: 30px;
     color: white;
-    font-family: 'Nunito';
+    font-family: 'Nunito', sans-serif;
     font-size: small;
     text-transform: uppercase;
 }
@@ -552,10 +575,9 @@ th.nombre_column {
 }
 
 .cab {
-    width: 120px;
-    max-width: 120px;
+    width: 150px;
+    min-width: 100px;
     font-weight: 400;
-    background: var(--c2);
 }
 
 th.cab.cab-pres {
@@ -564,8 +586,8 @@ th.cab.cab-pres {
 }
 
 .cab-pres, .cab-pedido {
-    width: 90px;
-    min-width: 90px;
+    width: 100px;
+    background: var(--c4);
 }
 
 td.radio {
@@ -574,6 +596,7 @@ td.radio {
 
 .cab-total{
     border-left: 5px solid white;
+    background: var(--c2);
 }
 
 input.tipo-pres {
@@ -630,10 +653,20 @@ input[type='radio']:checked:after {
     border-radius: 5px;
     top: -2px;
     left: -1px;
-    background-color: #ffa500;
+    background-color: var(--c2);
     content: '';
     display: inline-block;
     visibility: visible;
+}
+
+.tablaExel th, .tablaExel td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.tablaExel th {
+    background-color: #f2f2f2;
 }
 
 
@@ -665,7 +698,7 @@ input[type='radio']:checked:after {
     background-color: white;
     position: relative;
     margin: auto;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-size: small;
     font-weight: 300;
     box-shadow: 5px 5px 10px #88888882;
@@ -757,7 +790,7 @@ p.log-error {
     cursor: pointer;
     padding: 5px 16px;
     text-align: center;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-size: small;
     font-weight: 300;
 }
@@ -787,7 +820,7 @@ p.log-error {
     padding: 7px 25px;
     border-radius: 8px;
     color: #fff;
-    FONT-FAMILY: 'Roboto';
+    FONT-FAMILY: 'Roboto', sans-serif;
     letter-spacing: 1px;
     transition: all .5s;
     position: relative;
@@ -890,7 +923,7 @@ p.log-error {
     color: #0f1111;
     cursor: pointer;
     display: inline-block;
-    font-family: 'Nunito';
+    font-family: 'Nunito', sans-serif;
     line-height: 30px;
     padding: 0 20px;
     letter-spacing: 0.5px;
@@ -919,7 +952,7 @@ p.log-error {
 input#fileInput {
     margin-top: -5px;
     text-align-last: center;
-    font-family: 'Nunito';
+    font-family: 'Nunito', sans-serif;
     letter-spacing: 0.2px;
     color: #a7a3a3;
 }
@@ -952,7 +985,7 @@ input.int-btn:hover, input.int-btn:focus{
 
 }
 .selec-arch {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
 }
 
 
@@ -1027,4 +1060,89 @@ input.int-btn:hover, input.int-btn:focus{
 
 .ir-wapp .adm {
     justify-content: center;
+}
+
+.mobile{
+    display: none;
+}
+
+@media only screen and (max-width: 1500px){
+    main{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-pedido{
+        background-position: right -129px top -83px;
+    }
+
+    .categorias{
+        flex-direction: row;
+        width: 90%;
+        align-items: center;
+        margin: 0;
+    }
+
+    .cat-buscador{
+        width: 25%;
+        gap: 0;
+    }
+
+    .input-buscador{
+        width: 70%;
+    }
+
+    .list-cat{
+        width: 100%;
+        margin-left: 50px;
+    }
+
+    ul {
+        display: grid;
+        justify-content: space-between;
+        grid-template-columns: repeat(auto-fill, minmax(160px, max-content));
+        flex-direction: column;
+        gap: 5px 20px;
+        padding: 0;
+        width: 100%;
+    }
+    
+    li {
+        padding: 5px;
+    }
+}
+
+@media only screen and (max-width: 1280px){
+    main, header{
+        display: none;
+    }
+    .mobile{
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .mb-cont {
+        width: 60%;
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .mb-cont img {
+        width: 70%;
+        margin-bottom: 15px;
+    }
+
+    .mb-cont p {
+        font-family: 'Roboto';
+        text-align: center;
+        font-size: small;
+    }
 }

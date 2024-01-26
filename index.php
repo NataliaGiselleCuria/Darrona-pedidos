@@ -72,9 +72,9 @@ $categoria = null;
                 </span>
                 <span class="btn">
                     <button class=" bt volver" onclick="categoria('TODOS LOS PRODUCTOS')">VOLVER</button>
-                    <button class="bt ver-resumen" onclick="verPedido()">VER PEDIDO</button>
+                    <button class="bt ver-resumen" onclick="verPedido(1)">VER PEDIDO</button>
                     
-                    <button class="bt fin" onclick="abrirVentana(), verPedido()" >FINALIZAR</button>
+                    <button class="bt fin" onclick="abrirVentana(), verPedido(2)" >FINALIZAR</button>
                     <button class="bt cerrar" onclick="cerrar()">CERRAR</button>
                 </span>
             </div>
@@ -117,21 +117,21 @@ $categoria = null;
                     <div class="fila btn">
                         <span>
                         <label><input class="check-pedido" type="checkbox" id="check">Revisaste tu pedido? Una vez enviado no podrá modificarse.</label>
-                        <p>Tu pedido se descargará automaticamente</p>
+                        <p class="no-error">Tu pedido se descargará automaticamente</p>
+                        <p class="error"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingrese todos los datos y confirme haber revisado el pedido.</p>
                         </span>
                         <span class="btn e">
                             <button class="bt enviar" onclick="verificarError()">DESCARGAR</button>
                         </span>
                     </div>
-                    <p class="error"><i class="fa-solid fa-triangle-exclamation"></i> Por favor ingrese todos los datos y confirme haber revisado el pedido.</p>
+                    
                 </div>
             </section>
         </div>
         <hr>
     </header>
     <section id="inicio"></section>
-    <main>
-        
+    <main>    
         <a href="#inicio" class="inicio"><i class="fa-solid fa-arrow-up"></i></a>
         <a href="https://wa.me/5492215952475?text=Hola%20Darrona!%20" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
         <section class="categorias">
@@ -154,17 +154,19 @@ $categoria = null;
                 </ul>
             </div>
         </section>
-        <section class="tabla">
-            
+        <section class="tabla">   
             <table class="cont-t">
-            <div class="titulo-cat">  
+                <div class="titulo-cat">  
                 <p class="cat-selec">TODOS LOS PRODUCTOS</p>
-                <div class="tool-tip">
-                    <div class="tool-tip-cont"></div>
-                    <div class="tool-tip-cont-arrow"></div>
+                <div class="tool-div">
+                    <div class="tool-tip-cont">
+                        <div class="tool-tip">
+                            <p>COMPLETA TU PEDIDO</p><p class="cerrar-tool"><i class="fa-solid fa-xmark"></i></p>
+                        </div>
+                        <div class="tool-arrow"></div>
+                    </div>
                 </div>
-                <!-- <p class="alert-pedido">ingrese su pedido</p> -->
-            </div>
+                </div>
                 <tr class="productos">
                     <?php
                     foreach ($cabecera as $column) {
@@ -209,11 +211,12 @@ $categoria = null;
                         <td class="colum-cen cant-prod-pedido"><input class="cant-pedido" type="number" min="0" oninput="validity.valid||(value='');"></td>
                         <td class="colum-cen total-prod-pedido"></td>
                         <td class="hidden prec-radio"></td>
+                        <td class="hidden radio-selec"></td>
                     </tr>
                 <?php } ?>
             </table>
             <table class="cont-t pedido-final">   
-            <tr class="productos">
+                <tr class="productos">
                     <?php
                     foreach ($cabecera as $column) {
                         if ($column['COLUMN_NAME'] == "Categoría") {
@@ -245,6 +248,7 @@ $categoria = null;
                 <tr><td></td></tr>
                 <tr>
                     <td>Código</td>
+                    <td>Presentacion</td>
                     <td>Cantidad x producto</td>
                     <td>Producto</td>
                 </tr>   
@@ -347,7 +351,19 @@ $categoria = null;
                 </div>
             </div>
         </section>
-    </main>
+    </main> 
+    <section class="mobile">
+        <div class="mb-cont">
+            <img src="img/Darrona vertical.png">
+            <p>Esta página no está disponible para este dispositivo.</p>
+            <p>Por favor, ingrese desde un ordenador.</p>
+            <p>Gracias!</p>
+            <a href="https://wa.me/5492215952475?text=Hola%20Darrona!%20" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
+        </div>
+    </section>  
+    <script src="xlsx.core.js"></script>
+    <script src="FileSaver.js"></script>
+    <script src="tableexport.js"></script> 
 </body>
 </html>
 <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>

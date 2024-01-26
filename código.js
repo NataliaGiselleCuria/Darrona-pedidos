@@ -6,6 +6,14 @@ let inputBuscador = document.querySelector(".input-buscador");
 let titulo_cat = document.querySelector(".cat-selec");
 inputBuscador.addEventListener('keyup', buscador);
 
+//Tool-tip.
+let tool = document.querySelector(".tool-div");
+let cerrarTool = document.querySelector(".cerrar-tool");
+
+cerrarTool.addEventListener('click', ()=>{
+    tool.remove();
+})
+
 //Totales por prodcto y total final.
 const format = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' });
 let cant = document.querySelectorAll(".cant-pedido");
@@ -65,9 +73,10 @@ function radio(x){
     let precRadio = 0;
     if(x.value=='uni'){
         precRadio=x.parentElement.previousElementSibling.previousElementSibling.innerHTML.slice(1);
-          
+        x.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML="Unidad";  
     }else{    
-        precRadio=x.parentElement.previousElementSibling.innerHTML.slice(1);   
+        precRadio=x.parentElement.previousElementSibling.innerHTML.slice(1);  
+        x.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML="Bulto"; 
     }
 
     if(precRadio=='-' || precRadio==0){
@@ -78,7 +87,6 @@ function radio(x){
 
     totalProd();
 }
-
 
 // Abrir/cerrar ventana
 let ventanaEnviar = document.querySelector('.enviar-pedido');
@@ -103,6 +111,7 @@ let apellido = document.querySelector('#apellido');
 let horarios = document.querySelector('#horario');
 let telefono = document.querySelector('#telefono');
 let check = document.querySelector('#check');
+let noError = document.querySelector('.no-error');
 
 nombre.addEventListener('keyup', habilitarEnviar);
 apellido.addEventListener('keyup', habilitarEnviar);
@@ -122,7 +131,7 @@ irwapp.addEventListener("click", ()=>{
 //inicio Darrona y act log
 let logo = document.querySelector('.logo');
 let logactive = document.querySelector(".login");
-let cerrarLog =  document.querySelector('.fa-solid.fa-xmark');
+let cerrarLog =  document.querySelector('.cerrar-log');
 let usuario = document.querySelector('#usuario');
 let clave = document.querySelector('#clave');
 let ver = document.querySelectorAll('.fa-regular.fa-eye');
@@ -262,7 +271,7 @@ function abrirVentana(){
     botonFinalizar.style.display = 'none';
     botonCerrar.style.display = 'unset';
 
-    inicio.style.height = '275px';
+    //inicio.style.height = '275px';
       
 }
 
@@ -275,7 +284,7 @@ function cerrar(){
     botonFinalizar.style.display = 'unset';
 
     
-    inicio.style.height = '230px'
+    inicio.style.height = '195px'
     
 }
 
@@ -286,15 +295,12 @@ function categoria(x){
 
         if( tabla.style.display == 'none'){
             tablaPedidoFinal.style.display = 'none';
-            tabla.style.display = 'block';
+            tabla.style.display = 'inline-table';
             botonVerPedido.style.display = 'block';
             botonVolver.style.display = 'none';
             info.style.height = '0px';
             infoCont.style.opacity = '0';
             infoCont.className = 'info-cont';
-
-            inicio.style.height = '170px'
-           
 
         }
 
@@ -303,6 +309,8 @@ function categoria(x){
                 prodLi[i].style.display="table-row";
             }
         }
+
+        inicio.style.height = '170px'
         
     }else{
         cate = x.innerText;
@@ -321,7 +329,7 @@ function categoria(x){
     }
 }
 
-function verPedido(){
+function verPedido(x){
     
     let elEliminar = document.querySelectorAll(".tr-tablaFinal");
 
@@ -357,9 +365,9 @@ function verPedido(){
 
     tabla.style.display = 'none';
 
-    tablaPedidoFinal.style.display = 'block';
+    tablaPedidoFinal.style.display = 'inline-table';
 
-    if(tablaPedidoFinal.style.display = 'block'){
+    if(tablaPedidoFinal.style.display = 'inline-table'){
         botonVerPedido.style.display = 'none';
         botonVolver.style.display = 'block';
     }
@@ -369,11 +377,12 @@ function verPedido(){
     infoCont.style.opacity = '1';
     infoCont.className = 'info-cont-cerrar';
 
-    if(ventanaEnviar.style.height=="0px" || ventanaEnviar.style.height==""){
-        inicio.style.height = '210px'
-    }else{
+    if(x==1){
+        inicio.style.height = '195px'
+    } else{
         inicio.style.height = '275px'
     }
+    
     
 }
 
@@ -412,10 +421,13 @@ function rellenarTablaExcel(){
         let cod = prodTFinal[i].children[1].cloneNode(true);
         let cant = document.createElement('TD');
         cant.innerHTML = prodTFinal[i].children[8].children[0].value;
+        let pres = document.createElement('TD');
+        pres.innerHTML = prodTFinal[i].children[11].innerHTML;
         let prod = document.createElement('TD');
         prod.innerHTML = prodTFinal[i].children[2].innerHTML;
 
         itemProducto.appendChild(cod);
+        itemProducto.append(pres)
         itemProducto.append(cant);
         itemProducto.append(prod);
 
@@ -427,6 +439,7 @@ function habilitarEnviar(){
     if(nombre.value!='' && apellido.value!='' && horario.value!='' && telefono.value!='' && check.checked==true){    
         enviar.style.backgroundColor = "#EDC98C"
         error.style.display = "none";
+        noError.style.display = "inherit"
     }else{
         enviar.style.backgroundColor = "#80808047"
     }
@@ -438,6 +451,8 @@ function verificarError(){
 
     if(nombre.value!='' && apellido.value!='' && horario.value!='' && telefono.value!='' && check.checked==true){
         if (error.style.display == "none"){
+
+            noError.style.display="inherit";
 
             rellenarTablaExcel();
 
@@ -451,7 +466,7 @@ function verificarError(){
 
     else {
         error.style.display = "unset";
-        
+        noError.style.display="none";
     }
 }
 
