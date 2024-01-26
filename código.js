@@ -125,7 +125,7 @@ let redir = document.querySelector('.redireccion');
 let irwapp = document.querySelector('.ir-wapp');
 
 irwapp.addEventListener("click", ()=>{
-    location.href ="https://wa.me/5491155722648?text=Hola%20Darrona!%20Adjunto%20el%20pedido%20generado%20por%20la%20web%20..."
+    location.href ="https://wa.me/5492215952475?text=Hola%20Darrona!%20Adjunto%20el%20pedido%20generado%20por%20la%20web%20..."
 })
 
 //inicio Darrona y act log
