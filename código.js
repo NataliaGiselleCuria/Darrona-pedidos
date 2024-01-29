@@ -282,20 +282,20 @@ function cerrar(){
     botonCerrar.style.display = 'none';
     botonFinalizar.style.display = 'unset';
 
-    inicio.style.height = '195px'
-
     if(info.style.display!="none"){
         logo.style.height = '140px';
+        inicio.style.height = '195px'
     }else{
         logo.style.height = '162px';
+        inicio.style.height = '170px'
     }
-    
+ 
 }
 
 function categoria(x){
 
     if(x == "TODOS LOS PRODUCTOS" || x.innerHTML == "TODOS LOS PRODUCTOS"){
-        cate = "TODOS LOS PRODUCTOS";
+         cate = "TODOS LOS PRODUCTOS";
 
         if( tabla.style.display == 'none'){
             tablaPedidoFinal.style.display = 'none';
@@ -392,8 +392,14 @@ function verPedido(x){
     logo.style.height = '140px'
 
     if(x==1){
-        inicio.style.height = '195px';
-        logo.style.height = '140px';
+        if(ventanaEnviarCont.style.display=="flex"){
+            inicio.style.height = '275px'; 
+        }else{
+            
+            inicio.style.height = '195px';
+            logo.style.height = '140px';
+        }
+        
     } else{
         inicio.style.height = '275px'; 
     }

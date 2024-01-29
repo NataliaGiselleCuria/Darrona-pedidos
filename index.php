@@ -44,7 +44,7 @@ $categoria = null;
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,300;0,400;0,500;1,200&display=swap;family=Montserrat:wght@100;200;300;400&amp;family=Nunito:wght@200;300;400;500&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <title>Darrona Alimentos Naturales</title>
     <meta name="description" content="Hacé tu pedido de productos de dietética naturales en Distribuidora Darrona">
-    <link rel="icon" type="image/x-icon" href="img/Darrona png.png" alt="Logo Distribuidora de productos naturales dietéticas Darrona">
+    <link rel="icon" type="image/x-icon" href="img/Darrona.png" alt="Logo Distribuidora dietéticas Darrona">
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/270cc5acdb.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
@@ -53,7 +53,7 @@ $categoria = null;
     <header>
         <nav>
             <div class="banner">
-                <img src="img/Darrona vertical.png" class="logo" alt="Logo Distribuidora de productos naturales dietéticas Darrona">
+                <img src="img/Darrona vertical.png" class="logo" alt="Logo Distribuidora dietéticas Darrona">
                 <div class="titulo">
                     <h1 class="t1">Pedidos Dietética Darrona</h1>
                     <h2 class="t2">LISTA DE PRECIOS MAYORISTA</h2>
@@ -131,7 +131,7 @@ $categoria = null;
         <hr>
     </header>
     <section id="inicio"></section>
-    <main>    
+    <main>
         <a href="#inicio" class="inicio"><i class="fa-solid fa-arrow-up"></i></a>
         <a href="https://wa.me/5492215952475?text=Hola%20Darrona!%20" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
         <section class="categorias">
@@ -154,9 +154,9 @@ $categoria = null;
                 </ul>
             </div>
         </section>
-        <section class="tabla">   
+        <section class="tabla">
             <table class="cont-t">
-                <div class="titulo-cat">  
+                <div class="titulo-cat">
                 <p class="cat-selec">TODOS LOS PRODUCTOS</p>
                 <div class="tool-div">
                     <div class="tool-tip-cont">
@@ -199,7 +199,7 @@ $categoria = null;
                     $pecioUnidad = $producto['Precio x Unidad'];
                     $precioBulto = $producto['Precio x Bulto'];
                 ?>
-                    <tr class="li-prod"> 
+                    <tr class="li-prod">
                         <td class="hidden"><?php echo $categoria ?></td>
                         <td class="smaller"><?php echo $codigo ?></td>
                         <td class="prod-nom"><?php echo $nombre ?></td>
@@ -215,7 +215,7 @@ $categoria = null;
                     </tr>
                 <?php } ?>
             </table>
-            <table class="cont-t pedido-final">   
+            <table class="cont-t pedido-final">
                 <tr class="productos">
                     <?php
                     foreach ($cabecera as $column) {
@@ -251,7 +251,7 @@ $categoria = null;
                     <td>Presentacion</td>
                     <td>Cantidad x producto</td>
                     <td>Producto</td>
-                </tr>   
+                </tr>
             </table>
         </section>
         <section class="login">
@@ -266,10 +266,10 @@ $categoria = null;
                     </span>
                     <span class="label">
                         <label for="clave">Contraseña<p class="asterisco"> * </p>:</label>
-                        <input type="password" id="clave" name="clave" class="form-control" required>                       
+                        <input type="password" id="clave" name="clave" class="form-control" required>
                             <i class="ver fa-regular fa-eye"></i>
-                            <i class="ver fa-regular fa-eye-slash"></i> 
-                        </input>                      
+                            <i class="ver fa-regular fa-eye-slash"></i>
+                        </input>
                     </span>
                     <span class="label"><p class="log-error"></p></span>
                     <p class="btn-simple ingresar"><a class="adm">INGRESAR</a></p>
@@ -285,7 +285,7 @@ $categoria = null;
                 <div class="act-list">
                     <p class="act-list titulo-log">Actualizar Lista</p>
                     <span class="act-list span-txt">
-                        <p class="p-importante"><i class="fa-solid fa-triangle-exclamation"></i> IMPORTANTE</p>                      
+                        <p class="p-importante"><i class="fa-solid fa-triangle-exclamation"></i> IMPORTANTE</p>
                         <div>
                             <p>Para que la tabla se actualice de forma correcta:</p>
                             <p>- Descargar el siguiente Excel.</p>
@@ -312,20 +312,20 @@ $categoria = null;
                 </div>
                 <div class="act-monto">
                 <p class="act-monto titulo-log">Actializar Monto Minimo</p>
-                    <span class="span-actual">                 
+                    <span class="span-actual">
                     <p> Valor actual del minimo de compra:</p>
                     <p class="p-importante" id="prec-minimo"><?php echo $monto[0]['monto']?></p>
                     </span>
                     <form class="form-monto" action="act-valor.php" method="post">
                         <label class="p-importante" for="nuevo-monto">Ingrese el nuevo monto minimo:</label>
-                        <input class="int-btn" type="number" name="nuevoMonto" id="nuevo-monto" target="_blank" required>   
+                        <input class="int-btn" type="number" name="nuevoMonto" id="nuevo-monto" target="_blank" required>
                         <button class=" btn-adm" onclick="actMontoMinimo()">ACTUALIZAR</button>
                         <span class="msj-estado-valor"></span>
                     </form>
                     <button class="act-monto btn-simple" onclick="volver(this)">VOLVER</button>
                 </div>
                 <div class="act-log">
-                    <p class="act-log titulo-log">Actualizar us o cont</p>                    
+                    <p class="act-log titulo-log">Actualizar us o cont</p>
                     <form class="form-log" action="actualizar.php" method="post" required>
                         <p class="p-importante"> Ingrese Usuario y contraseña actual:</p>
                         <span><input class="int-btn" type="text" id="actualUsuario" name="actualUsuario" class="form-control" placeholder="Usuario actual" required><input class="int-btn" type="password" id="actualClave" name="actualClave" class="form-control" placeholder="Clave actual" required></span>
@@ -337,7 +337,7 @@ $categoria = null;
                         <i class="ver log fa-regular fa-eye-slash"></i>
                         <button class="btn-adm" onclick="actUsCon()">ACTUALIZAR</button>
                         <span class="msj-estado-act"></span>
-                    </form>                   
+                    </form>
                     <button class="act-log btn-simple" onclick="volver(this)">VOLVER</button>
                 </div>
             </div>
@@ -347,23 +347,23 @@ $categoria = null;
                 <div class="redir-cont">
                     <p>Vamos a redirecconarte a nuestro chat de WhatsApp.</p>
                     <p>Por favor, adjunta el pedido que se acaba de descargar automaticamente.</p>
-                    <p class="btn-simple ir-wapp"><a class="adm">OK</a></p>   
+                    <p class="btn-simple ir-wapp"><a class="adm">OK</a></p>
                 </div>
             </div>
         </section>
-    </main> 
+    </main>
     <section class="mobile">
         <div class="mb-cont">
-            <img src="img/Darrona vertical.png">
+            <img src="img/Darrona vertical png.png" alt="Logo Distribuidora dietéticas Darrona">
             <p>Esta página no está disponible para este dispositivo.</p>
             <p>Por favor, ingrese desde un ordenador.</p>
             <p>Gracias!</p>
             <a href="https://wa.me/5492215952475?text=Hola%20Darrona!%20" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
         </div>
-    </section>  
+    </section>
     <script src="xlsx.core.js"></script>
     <script src="FileSaver.js"></script>
-    <script src="tableexport.js"></script> 
+    <script src="tableexport.js"></script>
 </body>
 </html>
 <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>

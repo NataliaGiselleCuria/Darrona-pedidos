@@ -946,7 +946,6 @@ p.log-error {
     gap: 10px;
     margin: 25px 0;
     width: 80%;
-    display: flex;
     align-items: center;
 }
 
@@ -1113,14 +1112,18 @@ input.int-btn:hover, input.int-btn:focus{
     }
 }
 
-@media only screen and (max-width: 1280px){
+@media screen and (max-width: 1280px){
+    body{
+        background-position: unset;
+    }
+
     main, header{
         display: none;
     }
+
     .mobile{
         display: flex;
         width: 100vw;
-        height: 100vh;
         justify-content: center;
         align-items: center;
         
@@ -1142,7 +1145,7 @@ input.int-btn:hover, input.int-btn:focus{
     }
 
     .mb-cont p {
-        font-family: 'Roboto';
+        font-family: 'Roboto', sans-serif;
         text-align: center;
         font-size: small;
     }
