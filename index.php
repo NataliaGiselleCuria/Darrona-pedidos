@@ -133,7 +133,7 @@ $categoria = null;
     <section id="inicio"></section>
     <main>
         <a href="#inicio" class="inicio"><i class="fa-solid fa-arrow-up"></i></a>
-        <a href="https://wa.me/5492215952475?text=Hola%20Darrona!%20" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
+        <a href="https://wa.me/22414970274?text=Hola%20Darrona!%20" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
         <section class="categorias">
             <div class="cat-buscador">
                 <p class="cat">CATEGORIAS</p>
@@ -358,7 +358,7 @@ $categoria = null;
             <p>Esta página no está disponible para este dispositivo.</p>
             <p>Por favor, ingrese desde un ordenador.</p>
             <p>Gracias!</p>
-            <a href="https://wa.me/5492215952475?text=Hola%20Darrona!%20" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
+            <a href="https://wa.me/22414970274?text=Hola%20Darrona!%20" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
         </div>
     </section>
     <script src="xlsx.core.js"></script>
